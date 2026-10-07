@@ -9,4 +9,8 @@
                 type="Magic\WebhookConnector\Model\ReviewManagement"/>
     <preference for="Magic\WebhookConnector\Api\Data\ReviewInterface"
                 type="Magic\WebhookConnector\Model\Data\Review"/>
+    <preference for="Magic\WebhookConnector\Api\ReviewWriteManagementInterface"
+                type="Magic\WebhookConnector\Model\ReviewWriteManagement"/>
+    <preference for="Magic\WebhookConnector\Api\Data\ReviewInputInterface"
+                type="Magic\WebhookConnector\Model\Data\ReviewInput"/>
 </config>

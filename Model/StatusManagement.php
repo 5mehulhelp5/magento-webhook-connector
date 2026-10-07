@@ -11,7 +11,7 @@ use Magic\WebhookConnector\Api\StatusManagementInterface;
 class StatusManagement implements StatusManagementInterface
 {
     public const MODULE_NAME = 'Magic_WebhookConnector';
-    public const MODULE_VERSION = '1.2.0';
+    public const MODULE_VERSION = '1.3.0';
 
     public function __construct(
         private readonly Config $config,
@@ -19,6 +19,9 @@ class StatusManagement implements StatusManagementInterface
     ) {
     }
 
+    /**
+     * @return \Magic\WebhookConnector\Api\Data\StatusInterface
+     */
     public function getStatus(): StatusInterface
     {
         return $this->statusFactory->create()

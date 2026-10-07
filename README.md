@@ -16,6 +16,7 @@
 - Webhook secret configured from Magento Admin (encrypted).
 - Anonymous REST ping so Magic CMS can detect whether the module is installed.
 - Authenticated, paginated product-review read APIs.
+- Authenticated product-review create, update, and delete APIs.
 
 ## Install via Private Composer (non-published module)
 
@@ -84,7 +85,7 @@ Example response:
 ```json
 {
   "module": "Magic_WebhookConnector",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "webhook_secret_configured": true
 }
 ```
@@ -101,6 +102,16 @@ GET {store_base_url}/rest/V1/magic-webhook-connector/reviews/{reviewId}
 ```
 
 The list endpoint returns a page of review IDs. The detail endpoint returns the review, product SKU, rating votes, status, customer identity when available, and timestamps.
+
+To write reviews, also grant `Magic Webhook Connector > Write Product Reviews` and reauthorize the Magento integration:
+
+```text
+POST   {store_base_url}/rest/V1/magic-webhook-connector/reviews
+PUT    {store_base_url}/rest/V1/magic-webhook-connector/reviews/{reviewId}
+DELETE {store_base_url}/rest/V1/magic-webhook-connector/reviews/{reviewId}
+```
+
+Create and update requests wrap the input as `{"review": {...}}`. Reviews are created as guests. Rating writes apply the selected 1–5 star option to every active product-rating dimension for the target store. CMS-origin writes suppress this module's review webhooks to prevent sync loops.
 
 ## Webhook Payload
 

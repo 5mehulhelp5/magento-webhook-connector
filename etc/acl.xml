@@ -10,6 +10,9 @@
                     <resource id="Magic_WebhookConnector::reviews"
                               title="Read Product Reviews"
                               sortOrder="10"/>
+                    <resource id="Magic_WebhookConnector::reviews_write"
+                              title="Write Product Reviews"
+                              sortOrder="20"/>
                 </resource>
             </resource>
         </resources>

@@ -34,7 +34,7 @@ class ReviewManagement implements ReviewManagementInterface
         $page = max(1, $page);
         $pageSize = min(250, max(1, $pageSize));
         $collection = $this->reviewCollectionFactory->create();
-        $collection->setOrder('review_id', 'ASC');
+        $collection->setOrder('main_table.review_id', 'ASC');
         $collection->setCurPage($page);
         $collection->setPageSize($pageSize);
 

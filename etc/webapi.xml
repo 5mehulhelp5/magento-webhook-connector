@@ -19,4 +19,22 @@
             <resource ref="Magic_WebhookConnector::reviews"/>
         </resources>
     </route>
+    <route url="/V1/magic-webhook-connector/reviews" method="POST">
+        <service class="Magic\WebhookConnector\Api\ReviewWriteManagementInterface" method="create"/>
+        <resources>
+            <resource ref="Magic_WebhookConnector::reviews_write"/>
+        </resources>
+    </route>
+    <route url="/V1/magic-webhook-connector/reviews/:reviewId" method="PUT">
+        <service class="Magic\WebhookConnector\Api\ReviewWriteManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magic_WebhookConnector::reviews_write"/>
+        </resources>
+    </route>
+    <route url="/V1/magic-webhook-connector/reviews/:reviewId" method="DELETE">
+        <service class="Magic\WebhookConnector\Api\ReviewWriteManagementInterface" method="delete"/>
+        <resources>
+            <resource ref="Magic_WebhookConnector::reviews_write"/>
+        </resources>
+    </route>
 </routes>
