@@ -10,6 +10,7 @@ use Magic\WebhookConnector\Api\ReviewManagementInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Review\Model\ResourceModel\Rating\Option\Vote\CollectionFactory as VoteCollectionFactory;
 use Magento\Review\Model\ResourceModel\Review\CollectionFactory;
 use Magento\Review\Model\Review;
 use Magento\Review\Model\ReviewFactory;
@@ -20,6 +21,7 @@ class ReviewManagement implements ReviewManagementInterface
     public function __construct(
         private readonly CollectionFactory $reviewCollectionFactory,
         private readonly ReviewFactory $reviewFactory,
+        private readonly VoteCollectionFactory $voteCollectionFactory,
         private readonly ReviewInterfaceFactory $reviewDataFactory,
         private readonly ProductRepositoryInterface $productRepository,
         private readonly CustomerRepositoryInterface $customerRepository,
@@ -74,7 +76,10 @@ class ReviewManagement implements ReviewManagementInterface
         }
 
         $ratings = [];
-        foreach ($review->getRatingVotes() as $vote) {
+        $ratingVotes = $this->voteCollectionFactory
+            ->create()
+            ->setReviewFilter($reviewId);
+        foreach ($ratingVotes as $vote) {
             $ratings[] = (int)$vote->getValue();
         }
 
