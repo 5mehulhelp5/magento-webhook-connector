@@ -9,4 +9,12 @@
         <observer name="magic_webhookconnector_product_delete_after"
                   instance="Magic\WebhookConnector\Observer\ProductDeleteAfter"/>
     </event>
+    <event name="review_save_after">
+        <observer name="magic_webhookconnector_review_save_after"
+                  instance="Magic\WebhookConnector\Observer\ReviewSaveAfter"/>
+    </event>
+    <event name="review_delete_after">
+        <observer name="magic_webhookconnector_review_delete_after"
+                  instance="Magic\WebhookConnector\Observer\ReviewDeleteAfter"/>
+    </event>
 </config>

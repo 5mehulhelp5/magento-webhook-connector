@@ -7,4 +7,16 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <route url="/V1/magic-webhook-connector/reviews" method="GET">
+        <service class="Magic\WebhookConnector\Api\ReviewManagementInterface" method="getList"/>
+        <resources>
+            <resource ref="Magic_WebhookConnector::reviews"/>
+        </resources>
+    </route>
+    <route url="/V1/magic-webhook-connector/reviews/:reviewId" method="GET">
+        <service class="Magic\WebhookConnector\Api\ReviewManagementInterface" method="getById"/>
+        <resources>
+            <resource ref="Magic_WebhookConnector::reviews"/>
+        </resources>
+    </route>
 </routes>

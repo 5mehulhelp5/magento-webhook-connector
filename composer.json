@@ -2,7 +2,7 @@
     "name": "magic/module-webhook-connector",
     "description": "Magento 2 webhook connector for Magic CMS",
     "type": "magento2-module",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "license": [
         "proprietary"
     ],
@@ -17,6 +17,9 @@
     "require": {
         "php": ">=8.1",
         "magento/framework": "*",
-        "magento/module-catalog": "*"
+        "magento/module-catalog": "*",
+        "magento/module-customer": "*",
+        "magento/module-review": "*",
+        "magento/module-store": "*"
     }
 }

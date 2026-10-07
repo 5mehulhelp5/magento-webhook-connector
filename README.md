@@ -1,6 +1,6 @@
 # Magic WebhookConnector (Magento 2 Module)
 
-`Magic_WebhookConnector` publishes product webhooks to your connector.
+`Magic_WebhookConnector` publishes product and review webhooks to your connector.
 
 ## Features
 
@@ -8,9 +8,14 @@
   - `product.created`
   - `product.updated`
   - `product.deleted`
+- Review lifecycle webhooks for:
+  - `review.created`
+  - `review.updated`
+  - `review.deleted`
 - Signed webhook delivery with `X-Magic-Signature` (HMAC SHA256).
 - Webhook secret configured from Magento Admin (encrypted).
 - Anonymous REST ping so Magic CMS can detect whether the module is installed.
+- Authenticated, paginated product-review read APIs.
 
 ## Install via Private Composer (non-published module)
 
@@ -79,12 +84,23 @@ Example response:
 ```json
 {
   "module": "Magic_WebhookConnector",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "webhook_secret_configured": true
 }
 ```
 
 If the module is missing or disabled, Magento returns 404 (`Request does not match any route.`). Existing installs need a module update (commands above) before this route exists.
+
+## Review REST API
+
+The connector's Magento integration must be granted the `Magic Webhook Connector > Read Product Reviews` ACL resource. It can then call:
+
+```text
+GET {store_base_url}/rest/V1/magic-webhook-connector/reviews?page=1&pageSize=100
+GET {store_base_url}/rest/V1/magic-webhook-connector/reviews/{reviewId}
+```
+
+The list endpoint returns a page of review IDs. The detail endpoint returns the review, product SKU, rating votes, status, customer identity when available, and timestamps.
 
 ## Webhook Payload
 
@@ -111,4 +127,17 @@ Headers sent by module:
 - `Content-Type: application/json`
 - `X-Magic-Event: <event_type>`
 - `X-Magic-Signature: <hmac_sha256(body, webhook_secret)>`
+
+Review payloads use the same headers. Example:
+
+```json
+{
+  "event_type": "review.updated",
+  "store_id": 1,
+  "store_url": "https://store.example.com",
+  "review_id": 123,
+  "product_id": 42,
+  "timestamp": "2026-10-07T06:30:00+00:00"
+}
+```
 

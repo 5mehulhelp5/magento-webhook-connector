@@ -5,4 +5,8 @@
                 type="Magic\WebhookConnector\Model\StatusManagement"/>
     <preference for="Magic\WebhookConnector\Api\Data\StatusInterface"
                 type="Magic\WebhookConnector\Model\Data\Status"/>
+    <preference for="Magic\WebhookConnector\Api\ReviewManagementInterface"
+                type="Magic\WebhookConnector\Model\ReviewManagement"/>
+    <preference for="Magic\WebhookConnector\Api\Data\ReviewInterface"
+                type="Magic\WebhookConnector\Model\Data\Review"/>
 </config>
